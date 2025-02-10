@@ -39,26 +39,10 @@ public class BookController {
         return "redirect:booklist";
     }
 
-    @GetMapping("/edit/{id}")
+    @RequestMapping(value = "/edit/{id}")
     public String editBook(@PathVariable("id") Long bookId, Model model) {
         model.addAttribute("book", repository.findById(bookId));
         return "editbook";
-    }
-
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String updateBook(Book book) {
-
-        Optional<Book> existingBook = repository.findById(book.getId());
-
-        Book editedBook = existingBook.get();
-        editedBook.setTitle(book.getTitle());
-        editedBook.setAuthor(book.getAuthor());
-        editedBook.setIsbn(book.getIsbn());
-        editedBook.setPublicationYear(book.getPublicationYear());
-        editedBook.setPrice(book.getPrice());
-        repository.save(editedBook);
-
-        return "redirect:booklist";
     }
 
     @GetMapping("/delete/{id}")

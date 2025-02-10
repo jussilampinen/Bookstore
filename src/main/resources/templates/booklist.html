@@ -28,11 +28,11 @@
                 <td th:text="${book.publicationYear}"></td>
                 <td th:text="${book.price}"></td>
                 <td><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>
-                <td><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
+                <td><a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-primary">Edit</a></td>
             </tr>
         </tbody>
     </table>
-    <a href="/add" class="btn btn-primary" class="btn btn-success">Add</a>
+    <a href="/add" class="btn btn-success">Add</a>
 </body>
 
 </html>

@@ -5,7 +5,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -39,15 +41,26 @@ public class BookController {
         return "redirect:booklist";
     }
 
-    @RequestMapping(value = "/edit/{id}")
-    public String editBook(@PathVariable("id") Long bookId, Model model) {
-        model.addAttribute("book", repository.findById(bookId));
-        return "editbook";
+    @Autowired
+    private BookRepository bookRepository;
+
+    @GetMapping("/edit/{id}")
+    public String showEditBookForm(@PathVariable("id") Long id, Model model) {
+        Optional<Book> book = bookRepository.findById(id);
+        model.addAttribute("book", book);
+        return "editbook"; 
     }
+
+    @PostMapping("/edit")
+    public String saveEditedBook(@ModelAttribute("book") Book book) {
+        bookRepository.save(book);
+        return "redirect:/booklist";
+    }
+
 
     @GetMapping("/delete/{id}")
     public String deleteBook(@PathVariable("id") Long bookId, Model model) {
         repository.deleteById(bookId);
-        return "redirect:../booklist";
+        return "redirect:/booklist";
     }
 }

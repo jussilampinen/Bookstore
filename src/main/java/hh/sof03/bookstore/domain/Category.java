@@ -37,9 +37,4 @@ public class Category {
     public List<Book> getBooks() { return books; }
     public void setBooks(List<Book> books) { this.books = books; }
     
-    //toString
-    @Override
-    public String toString() {
-        return "Category [categoryId=" + categoryId + ", name=" + name + ", books=" + books + "]";
-    }
 }

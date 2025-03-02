@@ -68,4 +68,5 @@ public class BookController {
         repository.deleteById(bookId);
         return "redirect:/booklist";
     }
+    
 }
